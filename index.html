@@ -3,23 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vente de copeaux de bois</title>
+<title>Commande de copeaux</title>
 
 <style>
 body{
-    font-family: Arial, sans-serif;
-    background:#eef8ee;
+    font-family:Arial,sans-serif;
+    background:#eef7ee;
     margin:0;
     padding:20px;
 }
 
 .card{
-    max-width:400px;
+    max-width:600px;
     margin:auto;
     background:white;
     padding:25px;
     border-radius:20px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    box-shadow:0 4px 12px rgba(0,0,0,.1);
 }
 
 h1{
@@ -27,40 +27,47 @@ h1{
     color:#2e7d32;
 }
 
-input, select, button{
+label{
+    display:block;
+    margin-top:10px;
+    font-weight:bold;
+}
+
+input, select{
     width:100%;
     padding:12px;
-    margin:8px 0;
     border:1px solid #ccc;
     border-radius:10px;
     box-sizing:border-box;
-}
-
-.total{
-    background:#f5f5f5;
-    padding:15px;
-    border-radius:10px;
-    text-align:center;
-    margin:15px 0;
-    font-size:20px;
+    margin-top:5px;
 }
 
 button{
+    width:100%;
+    padding:15px;
+    margin-top:20px;
     background:#2e7d32;
     color:white;
     border:none;
-    font-weight:bold;
+    border-radius:10px;
     cursor:pointer;
+    font-size:16px;
+}
+
+.resume{
+    background:#f5f5f5;
+    padding:15px;
+    border-radius:10px;
+    margin-top:20px;
 }
 
 .success{
     display:none;
     background:#e8f5e9;
-    color:#2e7d32;
     padding:15px;
     border-radius:10px;
-    text-align:center;
-    margin-top:15px;
+    margin-top:20px;
+    color:#2e7d32;
 }
 </style>
 </head>
@@ -69,44 +76,140 @@ button{
 
 <div class="card">
 
-<h1>🪵 Vente de copeaux de bois</h1>
-<p style="text-align:center">Libre-service</p>
+<h1>🪵 Vente de copeaux Thermobois</h1>
 
-<input type="text" placeholder="Votre nom">
+<h3>Informations client</h3>
 
-<input type="tel" placeholder="Votre téléphone">
+<label>Nom</label>
+<input type="text" id="nom">
 
-<select id="quantite" onchange="calculerPrix()">
-    <option value="25">0,5 m³ - CHF 25</option>
-    <option value="45" selected>1 m³ - CHF 45</option>
-    <option value="80">2 m³ - CHF 80</option>
+<label>Prénom</label>
+<input type="text" id="prenom">
+
+<label>Téléphone</label>
+<input type="tel" id="telephone">
+
+<label>Email</label>
+<input type="email" id="email">
+
+<label>Adresse</label>
+<input type="text" id="adresse">
+
+<label>NPA</label>
+<input type="text" id="npa">
+
+<label>Localité</label>
+<input type="text" id="localite">
+
+<h3>Produit</h3>
+
+<label>Type de produit</label>
+<select id="produit" onchange="calculer()">
+    <option value="crible">Copeaux criblés</option>
+    <option value="noncrible">Copeaux non criblés</option>
+    <option value="trifin">Tri fin (100 litres)</option>
 </select>
 
-<div class="total">
-    Total : CHF <span id="prix">45</span>
+<label>Quantité</label>
+<input type="number" id="quantite" value="1" min="1" onchange="calculer()">
+
+<label>
+<input type="checkbox" id="trax" onchange="calculer()">
+ Chargement au trax (+ CHF 30)
+</label>
+
+<div class="resume">
+    <strong>Numéro de commande :</strong>
+    <span id="commande"></span>
+    <br><br>
+
+    Prix : CHF <span id="prix">0</span>
+    <br>
+
+    Chargement : CHF <span id="prixTrax">0</span>
+    <br><br>
+
+    <strong>Total : CHF <span id="total">0</span></strong>
 </div>
 
 <button onclick="payer()">
-    Payer (simulation)
+Payer (simulation)
 </button>
 
-<div id="confirmation" class="success">
+<div class="success" id="success">
     ✅ Paiement accepté<br><br>
-    Commande enregistrée.<br>
-    Vous pouvez vous servir.
+
+    Merci pour votre commande.<br>
+    Numéro : <span id="commandeConfirm"></span>
 </div>
 
 </div>
 
 <script>
-function calculerPrix() {
-    document.getElementById("prix").innerText =
-        document.getElementById("quantite").value;
+
+function numeroCommande() {
+    const n = Math.floor(Math.random()*9000)+1000;
+    return "TB-2026-" + n;
 }
 
-function payer() {
-    document.getElementById("confirmation").style.display = "block";
+document.getElementById("commande").innerText = numeroCommande();
+
+function prixCrible(volume){
+
+    if(volume < 0.5) return 100;
+    if(volume < 3) return 70;
+    if(volume < 10) return 60;
+    if(volume < 20) return 56;
+    if(volume < 30) return 48;
+    return 42;
 }
+
+function prixNonCrible(volume){
+
+    if(volume < 0.5) return 80;
+    if(volume < 3) return 55;
+    if(volume < 10) return 48;
+    if(volume < 20) return 43;
+    if(volume < 30) return 39;
+    return 37;
+}
+
+function calculer(){
+
+    let produit = document.getElementById("produit").value;
+    let qte = parseFloat(document.getElementById("quantite").value) || 0;
+
+    let montant = 0;
+
+    if(produit === "crible"){
+        montant = qte * prixCrible(qte);
+    }
+
+    if(produit === "noncrible"){
+        montant = qte * prixNonCrible(qte);
+    }
+
+    if(produit === "trifin"){
+        montant = qte * 10;
+    }
+
+    let trax = document.getElementById("trax").checked ? 30 : 0;
+
+    document.getElementById("prix").innerText = montant.toFixed(2);
+    document.getElementById("prixTrax").innerText = trax.toFixed(2);
+    document.getElementById("total").innerText = (montant + trax).toFixed(2);
+}
+
+function payer(){
+
+    document.getElementById("commandeConfirm").innerText =
+    document.getElementById("commande").innerText;
+
+    document.getElementById("success").style.display = "block";
+}
+
+calculer();
+
 </script>
 
 </body>
