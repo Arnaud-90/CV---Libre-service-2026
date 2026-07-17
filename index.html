@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vente de copeaux de bois</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#eef8ee;
+    margin:0;
+    padding:20px;
+}
+
+.card{
+    max-width:400px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#2e7d32;
+}
+
+input, select, button{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border:1px solid #ccc;
+    border-radius:10px;
+    box-sizing:border-box;
+}
+
+.total{
+    background:#f5f5f5;
+    padding:15px;
+    border-radius:10px;
+    text-align:center;
+    margin:15px 0;
+    font-size:20px;
+}
+
+button{
+    background:#2e7d32;
+    color:white;
+    border:none;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.success{
+    display:none;
+    background:#e8f5e9;
+    color:#2e7d32;
+    padding:15px;
+    border-radius:10px;
+    text-align:center;
+    margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>🪵 Vente de copeaux de bois</h1>
+<p style="text-align:center">Libre-service</p>
+
+<input type="text" placeholder="Votre nom">
+
+<input type="tel" placeholder="Votre téléphone">
+
+<select id="quantite" onchange="calculerPrix()">
+    <option value="25">0,5 m³ - CHF 25</option>
+    <option value="45" selected>1 m³ - CHF 45</option>
+    <option value="80">2 m³ - CHF 80</option>
+</select>
+
+<div class="total">
+    Total : CHF <span id="prix">45</span>
+</div>
+
+<button onclick="payer()">
+    Payer (simulation)
+</button>
+
+<div id="confirmation" class="success">
+    ✅ Paiement accepté<br><br>
+    Commande enregistrée.<br>
+    Vous pouvez vous servir.
+</div>
+
+</div>
+
+<script>
+function calculerPrix() {
+    document.getElementById("prix").innerText =
+        document.getElementById("quantite").value;
+}
+
+function payer() {
+    document.getElementById("confirmation").style.display = "block";
+}
+</script>
+
+</body>
+</html>
