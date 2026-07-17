@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Commande de copeaux</title>
+
+<title>Thermobois - Commande de copeaux</title>
 
 <style>
+
 body{
     font-family:Arial,sans-serif;
     background:#eef7ee;
-    margin:0;
     padding:20px;
+    margin:0;
 }
 
 .card{
-    max-width:600px;
+    max-width:700px;
     margin:auto;
     background:white;
     padding:25px;
     border-radius:20px;
-    box-shadow:0 4px 12px rgba(0,0,0,.1);
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
 
 h1{
@@ -27,13 +30,18 @@ h1{
     color:#2e7d32;
 }
 
-label{
-    display:block;
-    margin-top:10px;
-    font-weight:bold;
+h3{
+    color:#2e7d32;
+    margin-top:25px;
 }
 
-input, select{
+label{
+    font-weight:bold;
+    display:block;
+    margin-top:12px;
+}
+
+input,select{
     width:100%;
     padding:12px;
     border:1px solid #ccc;
@@ -42,33 +50,44 @@ input, select{
     margin-top:5px;
 }
 
+.resume{
+    background:#f4f4f4;
+    padding:15px;
+    border-radius:10px;
+    margin-top:20px;
+}
+
 button{
     width:100%;
     padding:15px;
-    margin-top:20px;
     background:#2e7d32;
     color:white;
+    font-size:18px;
     border:none;
     border-radius:10px;
     cursor:pointer;
-    font-size:16px;
-}
-
-.resume{
-    background:#f5f5f5;
-    padding:15px;
-    border-radius:10px;
     margin-top:20px;
 }
 
 .success{
     display:none;
     background:#e8f5e9;
-    padding:15px;
+    color:#2e7d32;
+    padding:20px;
     border-radius:10px;
     margin-top:20px;
-    color:#2e7d32;
 }
+
+.prix{
+    background:#f8f8f8;
+    padding:15px;
+    border-radius:10px;
+}
+
+.radio{
+    width:auto;
+}
+
 </style>
 </head>
 
@@ -76,17 +95,28 @@ button{
 
 <div class="card">
 
-<h1>🪵 Vente de copeaux Thermobois</h1>
+<h1>🪵 Thermobois SA</h1>
+
+<p style="text-align:center;">
+Commande de copeaux en libre-service
+</p>
+
+<div class="prix">
+<b>Tarifs indicatifs</b><br><br>
+
+Tri fin : CHF 10 / sac de 100 litres<br>
+Chargement au trax : + CHF 30
+</div>
 
 <h3>Informations client</h3>
 
-<label>Nom</label>
+<label>Nom *</label>
 <input type="text" id="nom">
 
-<label>Prénom</label>
+<label>Prénom *</label>
 <input type="text" id="prenom">
 
-<label>Téléphone</label>
+<label>Téléphone *</label>
 <input type="tel" id="telephone">
 
 <label>Email</label>
@@ -104,108 +134,303 @@ button{
 <h3>Produit</h3>
 
 <label>Type de produit</label>
+
 <select id="produit" onchange="calculer()">
     <option value="crible">Copeaux criblés</option>
     <option value="noncrible">Copeaux non criblés</option>
     <option value="trifin">Tri fin (100 litres)</option>
 </select>
 
-<label>Quantité</label>
-<input type="number" id="quantite" value="1" min="1" onchange="calculer()">
+<h3>Volume ou quantité</h3>
 
 <label>
-<input type="checkbox" id="trax" onchange="calculer()">
- Chargement au trax (+ CHF 30)
+<input class="radio" type="radio"
+name="modeVolume"
+value="manuel"
+checked
+onclick="changerMode()">
+
+Je connais mon volume
 </label>
 
-<div class="resume">
-    <strong>Numéro de commande :</strong>
-    <span id="commande"></span>
-    <br><br>
+<label>
+<input class="radio" type="radio"
+name="modeVolume"
+value="calculateur"
+onclick="changerMode()">
 
-    Prix : CHF <span id="prix">0</span>
-    <br>
+Calculer mon volume
+</label>
 
-    Chargement : CHF <span id="prixTrax">0</span>
-    <br><br>
+<div id="volumeManuel">
 
-    <strong>Total : CHF <span id="total">0</span></strong>
+<label>Volume chargé (m³)</label>
+
+<input
+type="number"
+step="0.01"
+value="1"
+id="quantite"
+oninput="calculer()">
+
 </div>
+
+<div id="volumeCalculateur" style="display:none;">
+
+<label>Longueur (m)</label>
+<input
+type="number"
+step="0.01"
+id="longueur"
+oninput="calculerVolume()">
+
+<label>Largeur (m)</label>
+<input
+type="number"
+step="0.01"
+id="largeur"
+oninput="calculerVolume()">
+
+<label>Hauteur moyenne chargée (m)</label>
+<input
+type="number"
+step="0.01"
+id="hauteur"
+oninput="calculerVolume()">
+
+<div class="resume">
+
+Volume calculé :
+
+<strong>
+<span id="volumeCalcule">0.00</span> m³
+</strong>
+
+</div>
+
+</div>
+
+<div id="zoneTriFin" style="display:none;">
+
+<label>Nombre de sacs de 100 litres</label>
+
+<input
+type="number"
+id="nbSacs"
+value="1"
+min="1"
+oninput="calculer()">
+
+</div>
+
+<h3>Options</h3>
+
+<label>
+<input
+class="radio"
+type="checkbox"
+id="trax"
+onchange="calculer()">
+
+Chargement au trax (+ CHF 30)
+</label>
+
+<h3>Récapitulatif</h3>
+
+<div class="resume">
+
+Numéro de commande :
+
+<strong id="commande"></strong>
+
+<hr>
+
+Prix produit :
+CHF <span id="prix">0.00</span>
+
+<br><br>
+
+Chargement :
+CHF <span id="prixTrax">0.00</span>
+
+<hr>
+
+<strong>
+TOTAL :
+CHF <span id="total">0.00</span>
+</strong>
+
+</div>
+
+<label>
+<input
+class="radio"
+type="checkbox"
+required>
+
+J'accepte les conditions de vente
+</label>
 
 <button onclick="payer()">
 Payer (simulation)
 </button>
 
 <div class="success" id="success">
-    ✅ Paiement accepté<br><br>
 
-    Merci pour votre commande.<br>
-    Numéro : <span id="commandeConfirm"></span>
+✅ Paiement accepté
+
+<br><br>
+
+Commande enregistrée.
+
+<br><br>
+
+Numéro :
+<strong id="commandeConfirmation"></strong>
+
+<br><br>
+
+Merci pour votre achat.
+
 </div>
 
 </div>
 
 <script>
 
-function numeroCommande() {
-    const n = Math.floor(Math.random()*9000)+1000;
-    return "TB-2026-" + n;
+const commande =
+"TB-" +
+new Date().getFullYear() +
+"-" +
+Math.floor(Math.random()*9000+1000);
+
+document.getElementById("commande").innerText = commande;
+
+function changerMode(){
+
+let mode =
+document.querySelector('input[name="modeVolume"]:checked').value;
+
+if(mode==="manuel"){
+
+document.getElementById("volumeManuel").style.display="block";
+document.getElementById("volumeCalculateur").style.display="none";
+
+}else{
+
+document.getElementById("volumeManuel").style.display="none";
+document.getElementById("volumeCalculateur").style.display="block";
+
 }
 
-document.getElementById("commande").innerText = numeroCommande();
+calculer();
+}
+
+function calculerVolume(){
+
+let longueur =
+parseFloat(document.getElementById("longueur").value)||0;
+
+let largeur =
+parseFloat(document.getElementById("largeur").value)||0;
+
+let hauteur =
+parseFloat(document.getElementById("hauteur").value)||0;
+
+let volume =
+longueur * largeur * hauteur;
+
+document.getElementById("volumeCalcule").innerText =
+volume.toFixed(2);
+
+document.getElementById("quantite").value =
+volume.toFixed(2);
+
+calculer();
+
+}
 
 function prixCrible(volume){
 
-    if(volume < 0.5) return 100;
-    if(volume < 3) return 70;
-    if(volume < 10) return 60;
-    if(volume < 20) return 56;
-    if(volume < 30) return 48;
-    return 42;
+if(volume < 0.5) return 100;
+if(volume < 3) return 70;
+if(volume < 10) return 60;
+if(volume < 20) return 56;
+if(volume < 30) return 48;
+
+return 42;
 }
 
 function prixNonCrible(volume){
 
-    if(volume < 0.5) return 80;
-    if(volume < 3) return 55;
-    if(volume < 10) return 48;
-    if(volume < 20) return 43;
-    if(volume < 30) return 39;
-    return 37;
+if(volume < 0.5) return 80;
+if(volume < 3) return 55;
+if(volume < 10) return 48;
+if(volume < 20) return 43;
+if(volume < 30) return 39;
+
+return 37;
 }
 
 function calculer(){
 
-    let produit = document.getElementById("produit").value;
-    let qte = parseFloat(document.getElementById("quantite").value) || 0;
+let produit =
+document.getElementById("produit").value;
 
-    let montant = 0;
+let montant = 0;
 
-    if(produit === "crible"){
-        montant = qte * prixCrible(qte);
-    }
+if(produit === "trifin"){
 
-    if(produit === "noncrible"){
-        montant = qte * prixNonCrible(qte);
-    }
+document.getElementById("zoneTriFin").style.display="block";
 
-    if(produit === "trifin"){
-        montant = qte * 10;
-    }
+let sacs =
+parseFloat(document.getElementById("nbSacs").value)||0;
 
-    let trax = document.getElementById("trax").checked ? 30 : 0;
+montant = sacs * 10;
 
-    document.getElementById("prix").innerText = montant.toFixed(2);
-    document.getElementById("prixTrax").innerText = trax.toFixed(2);
-    document.getElementById("total").innerText = (montant + trax).toFixed(2);
+}else{
+
+document.getElementById("zoneTriFin").style.display="none";
+
+let volume =
+parseFloat(document.getElementById("quantite").value)||0;
+
+if(produit==="crible"){
+montant = volume * prixCrible(volume);
+}
+
+if(produit==="noncrible"){
+montant = volume * prixNonCrible(volume);
+}
+
+}
+
+let trax =
+document.getElementById("trax").checked ? 30 : 0;
+
+document.getElementById("prix").innerText =
+montant.toFixed(2);
+
+document.getElementById("prixTrax").innerText =
+trax.toFixed(2);
+
+document.getElementById("total").innerText =
+(montant + trax).toFixed(2);
+
 }
 
 function payer(){
 
-    document.getElementById("commandeConfirm").innerText =
-    document.getElementById("commande").innerText;
+document.getElementById("commandeConfirmation").innerText =
+commande;
 
-    document.getElementById("success").style.display = "block";
+document.getElementById("success").style.display = "block";
+
+window.scrollTo({
+top:document.body.scrollHeight,
+behavior:"smooth"
+});
+
 }
 
 calculer();
