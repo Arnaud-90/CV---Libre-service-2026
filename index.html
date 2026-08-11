@@ -83,16 +83,26 @@ button{
 
 <p>Achat de copeaux en libre-service</p>
 
+<h3>Type de client</h3>
+
+<select id="typeClient" onchange="changerTypeClient()">
+    <option value="particulier">Particulier</option>
+    <option value="entreprise">Entreprise / Compte client</option>
+</select>
+`
+    
+<div id="zoneParticulier">
+
 <h3>Informations client</h3>
 
 <label>Nom *</label>
-<input type="text" id="nom" required>
+<input type="text" id="nom">
 
 <label>Prénom *</label>
-<input type="text" id="prenom" required>
+<input type="text" id="prenom">
 
 <label>Téléphone *</label>
-<input type="tel" id="telephone" required>
+<input type="tel" id="telephone">
 
 <label>Email</label>
 <input type="email" id="email">
@@ -106,25 +116,29 @@ button{
 <label>Localité</label>
 <input type="text" id="localite">
 
-<h3>Type de client</h3>
-
-<select id="typeClient" onchange="changerTypeClient()">
-    <option value="particulier">Particulier</option>
-    <option value="entreprise">Entreprise / Compte client</option>
-</select>
+</div>
 
 <div id="zoneEntreprise" style="display:none;">
 
-<label>Nom de l'entreprise</label>
-<input
-type="text"
-id="entreprise">
+<h3>Informations entreprise</h3>
 
-<label>Code compte client Thermobois</label>
+<label>Entreprise *</label>
+<input type="text" id="entreprise">
+
+<label>Code compte client *</label>
 <input
 type="text"
 id="codeClient"
 placeholder="Ex : PAYSAGE01">
+
+<label>Personne de contact *</label>
+<input type="text" id="contact">
+
+<label>Téléphone *</label>
+<input type="tel" id="telephoneEntreprise">
+
+<label>Email</label>
+<input type="email" id="emailEntreprise">
 
 </div>
     
@@ -345,10 +359,9 @@ CHF <span id="remise">0.00</span>
 Chargement :
 CHF <span id="prixTrax">0.00</span>
 
-<br><br>
-
 Statut :
 <span id="statut">Client</span>
+
 <br><br>
 
 Type de client :
@@ -410,6 +423,22 @@ const commande =
 Math.floor(Math.random()*9000+1000);
 
 document.getElementById("commande").innerText = commande;
+
+function changerTypeClient(){
+
+    const type =
+    document.getElementById("typeClient").value;
+
+    document.getElementById("zoneParticulier").style.display =
+    (type==="particulier")
+    ? "block"
+    : "none";
+
+    document.getElementById("zoneEntreprise").style.display =
+    (type==="entreprise")
+    ? "block"
+    : "none";
+}
 
 function changerMode(){
 
@@ -476,18 +505,6 @@ function changerTypeClient(){
     ? "block"
     : "none";
 }
-    
-function changerModePaiement(){
-
-    const mode =
-    document.getElementById("modePaiement").value;
-
-    document.getElementById("zoneFacture").style.display =
-    (mode==="facture")
-    ? "block"
-    : "none";
-}    
-    
 
 function calculerVolumeTriFin(){
 
@@ -741,11 +758,12 @@ if(!comptesClients.includes(codeClient)){
     return;
 }
      
-    if(
-    document.getElementById("entreprise").value.trim()==="" ||
-    document.getElementById("codeClient").value.trim()===""
-    ){
-
+   if(
+document.getElementById("entreprise").value.trim()==="" ||
+document.getElementById("codeClient").value.trim()==="" ||
+document.getElementById("contact").value.trim()==="" ||
+document.getElementById("telephoneEntreprise").value.trim()===""
+){
         alert(
         "Veuillez renseigner le nom de l'entreprise et le code client."
         );
