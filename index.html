@@ -342,10 +342,12 @@ Quantité :
 
 <br><br>
 
+<div id="lignePrixUnitaire">
+
 Prix unitaire :
 CHF <span id="prixUnitaire"></span>
 
-<br><br>
+</div>
 
 Montant produit :
 CHF <span id="prix"></span>
@@ -542,14 +544,6 @@ function prixCribleParticulier(v){
     return 42;
 }
 
-function prixCribleEntreprise(v){
-
-    if(v<20) return 54;
-    if(v<30) return 43;
-    if(v>30) return 39;
-
-    return 40;
-}
     
 function prixNonCribleParticulier(v){
 
@@ -561,17 +555,11 @@ if(v<30) return 39;
 return 37;
 
 }
-
-function prixNonCribleEntreprise(v){
-
-if(v<20) return 41;
-if(v<30) return 36;
-if(v>30) return 34;
-return 37;
-
-}
     
 function calculer(){
+    
+let typeClient =
+document.getElementById("typeClient").value;
 
 if(typeClient==="entreprise"){
 
@@ -587,20 +575,13 @@ if(typeClient==="entreprise"){
 
     }
 
-}
+}else{
 
+    document.getElementById("etatCompteClient").innerHTML = "";
+
+}
     let produit =
 document.getElementById("produit").value;
-
-let typeClient =
-document.getElementById("typeClient").value;
-
-let clientEntrepriseValide =
-(
-    typeClient==="entreprise"
-    &&
-    estCompteClientValide()
-);
 
 if(produit==="trifin"){
 
@@ -694,12 +675,8 @@ parseFloat(document.getElementById("quantite").value)||0;
 quantiteTexte=volume.toFixed(2)+" m³";
 
 if(produit==="crible"){
-
-if(clientEntrepriseValide){
-    prixUnit=prixCribleEntreprise(volume);
-}else{
-    prixUnit=prixCribleParticulier(volume);
-}
+    
+prixUnit = prixCribleParticulier(volume);
 
 montant=volume*prixUnit;
 document.getElementById("recapProduit").innerText=
@@ -709,11 +686,8 @@ document.getElementById("recapProduit").innerText=
 
 if(produit==="noncrible"){
 
-if(clientEntrepriseValide){
-    prixUnit=prixNonCribleEntreprise(volume);
-}else{
-    prixUnit=prixNonCribleParticulier(volume);
-}
+prixUnit = prixNonCribleParticulier(volume);
+    
 montant=volume*prixUnit;
 
 document.getElementById("recapProduit").innerText=
@@ -749,6 +723,19 @@ document.getElementById("trax").checked ? 30 : 0;
 let total =
 montant-remise+trax;
 
+if(typeClient==="entreprise"){
+
+    document.getElementById("lignePrixUnitaire").style.display =
+    "none";
+
+}else{
+
+    document.getElementById("lignePrixUnitaire").style.display =
+    "block";
+
+}
+``
+  
 document.getElementById("prixUnitaire").innerText =
 prixUnit.toFixed(2);
 
