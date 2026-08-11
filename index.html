@@ -278,6 +278,28 @@ onchange="calculer()">
 Chargement au trax (+ CHF 30)
 </label>
 
+<h3>Mode de règlement</h3>
+
+<select id="modePaiement" onchange="changerModePaiement()">
+    <option value="comptant">Paiement immédiat</option>
+    <option value="facture">Compte client Thermobois</option>
+</select>
+
+<div id="zoneFacture" style="display:none;">
+
+<label>Nom de l'entreprise</label>
+<input
+type="text"
+id="entreprise">
+
+<label>Code client Thermobois</label>
+<input
+type="text"
+id="codeClient"
+placeholder="Ex : PAYSAGE01">
+
+</div>
+    
 <h3>Code promo</h3>
 
 <input
@@ -327,7 +349,13 @@ CHF <span id="prixTrax">0.00</span>
 
 Statut :
 <span id="statut">Client</span>
+<br><br>
 
+Mode de règlement :
+<span id="recapPaiement">
+Paiement immédiat
+</span>
+    
 <hr>
 
 <strong>
@@ -346,6 +374,17 @@ id="conditions">
 J'accepte les conditions générales de vente
 </label>
 
+function changerModePaiement(){
+
+    const mode =
+    document.getElementById("modePaiement").value;
+
+    document.getElementById("zoneFacture").style.display =
+    (mode==="facture")
+    ? "block"
+    : "none";
+}
+    
 <button onclick="payer()">
 Payer (simulation)
 </button>
@@ -596,6 +635,13 @@ document.getElementById("recapProduit").innerText=
 }
 
 let remise=0;
+let modePaiement =
+document.getElementById("modePaiement").value;
+
+document.getElementById("recapPaiement").innerText =
+(modePaiement==="facture")
+? "Compte client Thermobois"
+: "Paiement immédiat";
 
 if(
 document.getElementById("codePromo")
@@ -655,6 +701,23 @@ alert("Veuillez accepter les conditions générales.");
 return;
 }
 
+
+ if(
+document.getElementById("modePaiement").value==="facture"
+){
+
+    if(
+    document.getElementById("entreprise").value.trim()==="" ||
+    document.getElementById("codeClient").value.trim()===""
+    ){
+
+        alert(
+        "Veuillez renseigner le nom de l'entreprise et le code client."
+        );
+
+        return;
+    }
+}   
 document.getElementById("commandeConfirmation").innerText =
 commande;
 
