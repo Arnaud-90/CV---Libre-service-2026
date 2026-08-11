@@ -160,18 +160,211 @@ Volume calculé :
 </div>
 
 <div id="zoneTriFin" style="display:none;">
-
+2
+ 
+3
+<h4>Mode de calcul du Tri fin</h4>
+4
+ 
+5
+<label>
+6
+<input class="checkbox"
+7
+type="radio"
+8
+name="modeTriFin"
+9
+value="sacs"
+10
+checked
+11
+onchange="changerModeTriFin()">
+12
+ 
+13
+Nombre de sacs
+14
+</label>
+15
+ 
+16
+<label>
+17
+<input class="checkbox"
+18
+type="radio"
+19
+name="modeTriFin"
+20
+value="volume"
+21
+onchange="changerModeTriFin()">
+22
+ 
+23
+Volume connu (m³)
+24
+</label>
+25
+ 
+26
+<label>
+27
+<input class="checkbox"
+28
+type="radio"
+29
+name="modeTriFin"
+30
+value="calculateur"
+31
+onchange="changerModeTriFin()">
+32
+ 
+33
+Calculateur de volume
+34
+</label>
+35
+ 
+36
+<div id="triFinSacs">
+37
+ 
+38
 <label>Nombre de sacs de 100 litres</label>
-
+39
+ 
+40
 <input
+41
 type="number"
+42
 id="nbSacs"
+43
 value="1"
+44
 min="1"
+45
 oninput="calculer()">
-
+46
+ 
+47
 </div>
-
+48
+ 
+49
+<div id="triFinVolume" style="display:none;">
+50
+ 
+51
+<label>Volume (m³)</label>
+52
+ 
+53
+<input
+54
+type="number"
+55
+id="volumeTriFin"
+56
+step="0.01"
+57
+value="1"
+58
+oninput="calculer()">
+59
+ 
+60
+</div>
+61
+ 
+62
+<div id="triFinCalculateur" style="display:none;">
+63
+ 
+64
+<label>Longueur (m)</label>
+65
+<input
+66
+type="number"
+67
+id="tfLongueur"
+68
+step="0.01"
+69
+oninput="calculerVolumeTriFin()">
+70
+ 
+71
+<label>Largeur (m)</label>
+72
+<input
+73
+type="number"
+74
+id="tfLargeur"
+75
+step="0.01"
+76
+oninput="calculerVolumeTriFin()">
+77
+ 
+78
+<label>Hauteur moyenne chargée (m)</label>
+79
+<input
+80
+type="number"
+81
+id="tfHauteur"
+82
+step="0.01"
+83
+oninput="calculerVolumeTriFin()">
+84
+ 
+85
+<div class="resume">
+86
+ 
+87
+Volume calculé :
+88
+<strong>
+89
+<span id="tfVolumeCalcule">0.00</span> m³
+90
+</strong>
+91
+ 
+92
+<br><br>
+93
+ 
+94
+Equivalent :
+95
+<strong>
+96
+<span id="tfSacsEquiv">0</span> sacs
+97
+</strong>
+98
+ 
+99
+</div>
+100
+ 
+101
+</div>
+102
+ 
+103
+</div>
+    
 <h3>Options</h3>
 
 <label>
