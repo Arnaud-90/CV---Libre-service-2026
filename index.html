@@ -114,6 +114,8 @@ button{
     <option value="trifin">Tri fin (100 L)</option>
 </select>
 
+<div id="zoneCopeaux">
+
 <h3>Volume ou quantité</h3>
 
 <label>
@@ -155,6 +157,8 @@ oninput="calculer()">
 <div class="resume">
 Volume calculé :
 <strong><span id="volumeCalcule">0.00</span> m³</strong>
+</div>
+
 </div>
 
 </div>
@@ -481,13 +485,13 @@ document.getElementById("produit").value;
 
 if(produit==="trifin"){
 
-    document.getElementById("volumeManuel").style.display="none";
-    document.getElementById("volumeCalculateur").style.display="none";
+    document.getElementById("zoneCopeaux").style.display="none";
     document.getElementById("zoneTriFin").style.display="block";
 
 }
 else{
 
+    document.getElementById("zoneCopeaux").style.display="block";
     document.getElementById("zoneTriFin").style.display="none";
 
     let mode =
@@ -499,7 +503,6 @@ else{
     document.getElementById("volumeCalculateur").style.display =
     (mode==="calculateur") ? "block" : "none";
 }
-
 let montant=0;
 let prixUnit=0;
 let quantiteTexte="";
