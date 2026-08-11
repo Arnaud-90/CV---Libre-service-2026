@@ -389,6 +389,26 @@ function changerMode(){
 
 function calculerVolume(){
 
+let l =
+parseFloat(document.getElementById("longueur").value)||0;
+
+let L =
+parseFloat(document.getElementById("largeur").value)||0;
+
+let h =
+parseFloat(document.getElementById("hauteur").value)||0;
+
+let volume = l*L*h;
+
+document.getElementById("volumeCalcule").innerText =
+volume.toFixed(2);
+
+document.getElementById("quantite").value =
+volume.toFixed(2);
+
+calculer();
+}
+
     function changerModeTriFin(){
 
     let mode =
@@ -431,6 +451,7 @@ function calculerVolumeTriFin(){
 
     calculer();
 }
+
 
 let l =
 parseFloat(document.getElementById("longueur").value)||0;
@@ -499,9 +520,6 @@ else{
     document.getElementById("volumeCalculateur").style.display =
     (mode==="calculateur") ? "block" : "none";
 }
-
-let produit =
-document.getElementById("produit").value;
 
 let montant=0;
 let prixUnit=0;
