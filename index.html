@@ -452,27 +452,6 @@ function calculerVolumeTriFin(){
     calculer();
 }
 
-
-let l =
-parseFloat(document.getElementById("longueur").value)||0;
-
-let L =
-parseFloat(document.getElementById("largeur").value)||0;
-
-let h =
-parseFloat(document.getElementById("hauteur").value)||0;
-
-let volume = l*L*h;
-
-document.getElementById("volumeCalcule").innerText =
-volume.toFixed(2);
-
-document.getElementById("quantite").value =
-volume.toFixed(2);
-
-calculer();
-}
-
 function prixCrible(v){
 
 if(v<0.5) return 100;
