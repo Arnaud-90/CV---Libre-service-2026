@@ -130,6 +130,8 @@ type="text"
 id="codeClient"
 placeholder="Ex : PAYSAGE01">
 
+<div id="etatCompteClient"></div>
+
 <label>Personne de contact *</label>
 <input type="text" id="contact">
 
@@ -410,6 +412,17 @@ Numéro :
 
 <script>
 
+function estCompteClientValide(){
+
+    let codeClient =
+    document.getElementById("codeClient")
+    .value
+    .trim()
+    .toUpperCase();
+
+    return comptesClients.includes(codeClient);
+}    
+
 const comptesClients = [
     "PAYSAGE01",
     "PAYSAGE02",
@@ -560,11 +573,34 @@ return 37;
     
 function calculer(){
 
+if(typeClient==="entreprise"){
+
+    if(estCompteClientValide()){
+
+        document.getElementById("etatCompteClient").innerHTML =
+        "<span style='color:green'>✅ Compte client reconnu</span>";
+
+    }else{
+
+        document.getElementById("etatCompteClient").innerHTML =
+        "<span style='color:red'>❌ Compte client non reconnu</span>";
+
+    }
+
+}
+
     let produit =
 document.getElementById("produit").value;
 
 let typeClient =
-document.getElementById("typeClient").value;    
+document.getElementById("typeClient").value;
+
+let clientEntrepriseValide =
+(
+    typeClient==="entreprise"
+    &&
+    estCompteClientValide()
+);
 
 if(produit==="trifin"){
 
@@ -659,7 +695,7 @@ quantiteTexte=volume.toFixed(2)+" m³";
 
 if(produit==="crible"){
 
-if(typeClient==="entreprise"){
+if(clientEntrepriseValide){
     prixUnit=prixCribleEntreprise(volume);
 }else{
     prixUnit=prixCribleParticulier(volume);
@@ -673,12 +709,11 @@ document.getElementById("recapProduit").innerText=
 
 if(produit==="noncrible"){
 
-if(typeClient==="entreprise"){
+if(clientEntrepriseValide){
     prixUnit=prixNonCribleEntreprise(volume);
 }else{
     prixUnit=prixNonCribleParticulier(volume);
 }
-
 montant=volume*prixUnit;
 
 document.getElementById("recapProduit").innerText=
