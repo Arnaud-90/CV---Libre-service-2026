@@ -106,6 +106,28 @@ button{
 <label>Localité</label>
 <input type="text" id="localite">
 
+<h3>Type de client</h3>
+
+<select id="typeClient" onchange="changerTypeClient()">
+    <option value="particulier">Particulier</option>
+    <option value="entreprise">Entreprise / Compte client</option>
+</select>
+
+<div id="zoneEntreprise" style="display:none;">
+
+<label>Nom de l'entreprise</label>
+<input
+type="text"
+id="entreprise">
+
+<label>Code compte client Thermobois</label>
+<input
+type="text"
+id="codeClient"
+placeholder="Ex : PAYSAGE01">
+
+</div>
+    
 <h3>Produit</h3>
 
 <select id="produit" onchange="calculer()">
@@ -277,28 +299,6 @@ id="trax"
 onchange="calculer()">
 Chargement au trax (+ CHF 30)
 </label>
-
-<h3>Mode de règlement</h3>
-
-<select id="modePaiement" onchange="changerModePaiement()">
-    <option value="comptant">Paiement immédiat (TWINT)</option>
-    <option value="facture">Compte client Thermobois (Entreprise, commune...)</option>
-</select>
-
-<div id="zoneFacture" style="display:none;">
-
-<label>Nom de l'entreprise</label>
-<input
-type="text"
-id="entreprise">
-
-<label>Code compte client Thermobois</label>
-<input
-type="text"
-id="codeClient"
-placeholder="Ex : PAYSAGE01">
-
-</div>
     
 <h3>Code promo</h3>
 
@@ -351,10 +351,11 @@ Statut :
 <span id="statut">Client</span>
 <br><br>
 
-Mode de règlement :
-<span id="recapPaiement">
-Paiement immédiat
+Type de client :
+<span id="recapTypeClient">
+Particulier
 </span>
+
     
 <hr>
 
@@ -465,6 +466,17 @@ calculer();
     calculer();
 }
 
+function changerTypeClient(){
+
+    let typeClient =
+    document.getElementById("typeClient").value;
+
+    document.getElementById("zoneEntreprise").style.display =
+    (typeClient==="entreprise")
+    ? "block"
+    : "none";
+}
+    
 function changerModePaiement(){
 
     const mode =
@@ -643,13 +655,13 @@ document.getElementById("recapProduit").innerText=
 }
 
 let remise=0;
-let modePaiement =
-document.getElementById("modePaiement").value;
+let typeClient =
+document.getElementById("typeClient").value;
 
-document.getElementById("recapPaiement").innerText =
-(modePaiement==="facture")
-? "Compte client Thermobois"
-: "Paiement immédiat";
+document.getElementById("recapTypeClient").innerText =
+(typeClient==="entreprise")
+? "Entreprise / Compte client"
+: "Particulier";
 
 if(
 document.getElementById("codePromo")
@@ -710,8 +722,8 @@ return;
 }
 
 
- if(
-document.getElementById("modePaiement").value==="facture"
+if(
+document.getElementById("typeClient").value==="entreprise"
 ){
 
 let codeClient =
@@ -752,7 +764,7 @@ behavior:"smooth"
 });
 
 }
-changerModePaiement();
+changerTypeClient();
 calculer();
 
 
