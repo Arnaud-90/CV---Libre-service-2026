@@ -292,7 +292,7 @@ Chargement au trax (+ CHF 30)
 type="text"
 id="entreprise">
 
-<label>Code client Thermobois</label>
+<label>Code compte client Thermobois</label>
 <input
 type="text"
 id="codeClient"
@@ -373,17 +373,6 @@ id="conditions">
 
 J'accepte les conditions générales de vente
 </label>
-
-function changerModePaiement(){
-
-    const mode =
-    document.getElementById("modePaiement").value;
-
-    document.getElementById("zoneFacture").style.display =
-    (mode==="facture")
-    ? "block"
-    : "none";
-}
     
 <button onclick="payer()">
 Payer (simulation)
@@ -468,6 +457,18 @@ calculer();
 
     calculer();
 }
+
+function changerModePaiement(){
+
+    const mode =
+    document.getElementById("modePaiement").value;
+
+    document.getElementById("zoneFacture").style.display =
+    (mode==="facture")
+    ? "block"
+    : "none";
+}    
+    
 
 function calculerVolumeTriFin(){
 
@@ -729,8 +730,9 @@ behavior:"smooth"
 });
 
 }
-
+changerModePaiement();
 calculer();
+
 
 </script>
 
