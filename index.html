@@ -397,6 +397,13 @@ Numéro :
 
 <script>
 
+const comptesClients = [
+    "PAYSAGE01",
+    "PAYSAGE02",
+    "COMMUNE01",
+    "AGRI01"
+];
+    
 const commande =
 "TB-" + new Date().getFullYear() + "-" +
 Math.floor(Math.random()*9000+1000);
@@ -707,6 +714,21 @@ return;
 document.getElementById("modePaiement").value==="facture"
 ){
 
+let codeClient =
+document.getElementById("codeClient")
+.value
+.trim()
+.toUpperCase();
+
+if(!comptesClients.includes(codeClient)){
+
+    alert(
+    "Code compte client non reconnu."
+    );
+
+    return;
+}
+     
     if(
     document.getElementById("entreprise").value.trim()==="" ||
     document.getElementById("codeClient").value.trim()===""
