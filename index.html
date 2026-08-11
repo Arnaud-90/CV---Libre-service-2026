@@ -205,8 +205,8 @@ Calculateur de volume
 <input
 type="number"
 id="nbSacs"
-value="1"
-min="1"
+value="0"
+min="0"
 oninput="calculer()">
 
 </div>
@@ -281,8 +281,8 @@ Chargement au trax (+ CHF 30)
 <h3>Mode de règlement</h3>
 
 <select id="modePaiement" onchange="changerModePaiement()">
-    <option value="comptant">Paiement immédiat</option>
-    <option value="facture">Compte client Thermobois</option>
+    <option value="comptant">Paiement immédiat (TWINT)</option>
+    <option value="facture">Compte client Thermobois (Entreprise, commune...)</option>
 </select>
 
 <div id="zoneFacture" style="display:none;">
