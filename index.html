@@ -350,8 +350,6 @@ CHF <span id="prixUnitaire"></span>
 
 </div>
 
-</div>
-
 <div id="ligneMontantProduit">
 
 Montant produit :
@@ -382,6 +380,12 @@ Particulier
 <div id="messageEntreprise" style="display:none;color:#2e7d32;">
 Prix selon conditions commerciales Thermobois.
 </div>    
+
+Entreprise :
+<span id="recapEntreprise"></span>
+
+Code compte :
+<span id="recapCodeClient"></span>
     
 <hr>
 
@@ -760,14 +764,6 @@ if(typeClient==="entreprise"){
     "block";
 
     document.getElementById("ligneTotal").style.display =
-    "block";
-
-}
-
-    document.getElementById("lignePrixUnitaire").style.display =
-    "block";
-
-    document.getElementById("ligneMontantProduit").style.display =
     "block";
 
 }
