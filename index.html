@@ -458,14 +458,17 @@ function changerTypeClient(){
     document.getElementById("typeClient").value;
 
     document.getElementById("zoneParticulier").style.display =
-    type==="particulier" ? "block" : "none";
+    (type==="particulier")
+    ? "block"
+    : "none";
 
     document.getElementById("zoneEntreprise").style.display =
-    type==="entreprise" ? "block" : "none";
+    (type==="entreprise")
+    ? "block"
+    : "none";
 
     calculer();
 }
-
 function changerMode(){
 
     if(document.getElementById("produit").value==="trifin"){
