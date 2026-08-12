@@ -385,10 +385,14 @@ Prix selon conditions commerciales Thermobois.
     
 <hr>
 
+<div id="ligneTotal">
+
 <strong>
 TOTAL :
 CHF <span id="total"></span>
 </strong>
+
+</div>
 
 </div>
 
@@ -741,7 +745,21 @@ if(typeClient==="entreprise"){
     document.getElementById("ligneMontantProduit").style.display =
     "none";
 
+    document.getElementById("ligneTotal").style.display =
+    "none";
+
 }else{
+
+    document.getElementById("lignePrixUnitaire").style.display =
+    "block";
+
+    document.getElementById("ligneMontantProduit").style.display =
+    "block";
+
+    document.getElementById("ligneTotal").style.display =
+    "block";
+
+}
 
     document.getElementById("lignePrixUnitaire").style.display =
     "block";
@@ -787,12 +805,19 @@ quantiteTexte;
 function payer(){
 
 if(
-document.getElementById("nom").value.trim()==="" ||
-document.getElementById("prenom").value.trim()==="" ||
-document.getElementById("telephone").value.trim()===""
+document.getElementById("typeClient").value==="particulier"
 ){
-alert("Veuillez renseigner les champs obligatoires.");
-return;
+
+    if(
+    document.getElementById("nom").value.trim()==="" ||
+    document.getElementById("prenom").value.trim()==="" ||
+    document.getElementById("telephone").value.trim()===""
+    ){
+
+        alert("Veuillez renseigner les champs obligatoires.");
+        return;
+    }
+
 }
 
 if(
