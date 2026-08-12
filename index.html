@@ -351,8 +351,12 @@ CHF <span id="prixUnitaire"></span>
 
 </div>
 
+<div id="ligneMontantProduit">
+
 Montant produit :
 CHF <span id="prix"></span>
+
+</div>
 
 <br><br>
 
@@ -728,33 +732,24 @@ document.getElementById("trax").checked ? 30 : 0;
 let total =
 montant-remise+trax;
 
-if(
-typeClient==="entreprise"
-){
-
-    document.getElementById("lignePrixUnitaire").style.display =
-    "none";
-
-}else{
-
-    document.getElementById("lignePrixUnitaire").style.display =
-    "block";
-
-}
-
 if(typeClient==="entreprise"){
 
     document.getElementById("lignePrixUnitaire").style.display =
     "none";
 
+    document.getElementById("ligneMontantProduit").style.display =
+    "none";
+
 }else{
 
     document.getElementById("lignePrixUnitaire").style.display =
     "block";
 
+    document.getElementById("ligneMontantProduit").style.display =
+    "block";
+
 }
-``
-    
+  
 document.getElementById("prixUnitaire").innerText =
 prixUnit.toFixed(2);
     
@@ -770,10 +765,6 @@ trax.toFixed(2);
 document.getElementById("total").innerText =
 total.toFixed(2);
 
-document.getElementById("recapQuantite").innerText =
-quantiteTexte;
-
-}
 
 if(typeClient==="entreprise"){
 
@@ -784,6 +775,11 @@ if(typeClient==="entreprise"){
 
     document.getElementById("messageEntreprise").style.display =
     "none";
+
+}
+
+document.getElementById("recapQuantite").innerText =
+quantiteTexte;
 
 }
     
