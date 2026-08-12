@@ -344,8 +344,12 @@ Quantité :
 
 <div id="lignePrixUnitaire">
 
+<div id="lignePrixUnitaire">
+
 Prix unitaire :
 CHF <span id="prixUnitaire"></span>
+
+</div>
 
 </div>
 
@@ -372,6 +376,9 @@ Type de client :
 Particulier
 </span>
 
+<div id="messageEntreprise" style="display:none;color:#2e7d32;">
+Prix selon conditions commerciales Thermobois.
+</div>    
     
 <hr>
 
@@ -723,6 +730,20 @@ document.getElementById("trax").checked ? 30 : 0;
 let total =
 montant-remise+trax;
 
+if(
+typeClient==="entreprise"
+){
+
+    document.getElementById("lignePrixUnitaire").style.display =
+    "none";
+
+}else{
+
+    document.getElementById("lignePrixUnitaire").style.display =
+    "block";
+
+}
+
 if(typeClient==="entreprise"){
 
     document.getElementById("lignePrixUnitaire").style.display =
@@ -735,10 +756,10 @@ if(typeClient==="entreprise"){
 
 }
 ``
-  
+    
 document.getElementById("prixUnitaire").innerText =
 prixUnit.toFixed(2);
-
+    
 document.getElementById("prix").innerText =
 montant.toFixed(2);
 
@@ -756,6 +777,18 @@ quantiteTexte;
 
 }
 
+if(typeClient==="entreprise"){
+
+    document.getElementById("messageEntreprise").style.display =
+    "block";
+
+}else{
+
+    document.getElementById("messageEntreprise").style.display =
+    "none";
+
+}
+    
 function payer(){
 
 if(
