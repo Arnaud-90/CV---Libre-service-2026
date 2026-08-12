@@ -176,7 +176,7 @@ Calculer mon volume
 type="number"
 id="quantite"
 step="0.01"
-value="1"
+value="0"
 oninput="calculer()">
 
 </div>
@@ -257,7 +257,7 @@ oninput="calculer()">
 type="number"
 id="volumeTriFin"
 step="0.01"
-value="1"
+value="0"
 oninput="calculer()">
 
 </div>
@@ -624,8 +624,8 @@ else{
     document.getElementById("volumeCalculateur").style.display =
     (mode==="calculateur") ? "block" : "none";
 }
-let montant=0;
-let prixUnit=0;
+let montant = 0;
+let prixUnit = "";
 let quantiteTexte="";
 
 if(produit==="trifin"){
@@ -769,7 +769,7 @@ if(typeClient==="entreprise"){
 }
   
 document.getElementById("prixUnitaire").innerText =
-prixUnit.toFixed(2);
+prixUnit === "" ? "" : prixUnit.toFixed(2);
     
 document.getElementById("prix").innerText =
 montant.toFixed(2);
@@ -870,6 +870,11 @@ behavior:"smooth"
 });
 
 }
+
+document.getElementById("quantite").value = 0;
+document.getElementById("nbSacs").value = 0;
+document.getElementById("volumeTriFin").value = 0;
+    
 changerTypeClient();
 calculer();
 
