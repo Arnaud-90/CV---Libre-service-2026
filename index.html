@@ -307,14 +307,23 @@ Equivalent :
     
 <h3>Options</h3>
 
-<label>
-<input
-class="checkbox"
-type="checkbox"
-id="trax"
-onchange="calculer()">
-Chargement au trax (+ CHF 30)
-</label>
+<label>Mode de chargement</label>
+
+<select id="chargement" onchange="calculer()">
+
+    <option value="0">
+        Chargement par vous-même (pelle...)
+    </option>
+
+    <option value="10">
+        Chargement au trax par vous-même (+ CHF 10)
+    </option>
+
+    <option value="30">
+        Chargement par Thermobois (+ CHF 30)
+    </option>
+
+</select>
     
 <h3>Code promo</h3>
 
@@ -739,7 +748,9 @@ document.getElementById("statut").innerText=
 }
 
 let trax =
-document.getElementById("trax").checked ? 30 : 0;
+parseFloat(
+document.getElementById("chargement").value
+) || 0;
 
 let total =
 montant-remise+trax;
