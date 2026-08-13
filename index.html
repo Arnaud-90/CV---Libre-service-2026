@@ -330,23 +330,23 @@ Equivalent :
     
 <h3>Options</h3>
 
-<label>
-<input
-class="checkbox"
-type="checkbox"
-id="trax30"
-onchange="calculer()">
-Chargement au trax par Thermobois (+ CHF 30)
-</label>
+<label>Mode de chargement</label>
 
-<label>
-<input
-class="checkbox"
-type="checkbox"
-id="trax10"
-onchange="calculer()">
-Chargement au trax par vous même (+ CHF 10)
-</label>    
+<select id="chargement" onchange="calculer()">
+
+    <option value="0">
+        Chargement par vous-même (pelle...)
+    </option>
+
+    <option value="10">
+        Chargement au trax par vous-même (+ CHF 10)
+    </option>
+
+    <option value="30">
+        Chargement par Thermobois (+ CHF 30)
+    </option>
+
+</select>
     
 <h3>Code promo</h3>
 
@@ -404,6 +404,11 @@ CHF <span id="remise">0.00</span>
 Chargement :
 CHF <span id="prixTrax">0.00</span>
 
+<br><br>
+
+Mode de chargement :
+<span id="recapChargement"></span>
+    
 <br><br>
 
 Type de client :
@@ -782,16 +787,30 @@ document.getElementById("statut").innerText=
 "Client";
 }
 
-let trax = 0;
+let trax =
+parseFloat(
+document.getElementById("chargement").value
+) || 0;
 
-if(document.getElementById("trax30").checked){
-    trax += 30;
+let texteChargement = "";
+
+if(trax===0){
+    texteChargement =
+    "Chargement par vous-même (pelle...)";
 }
 
-if(document.getElementById("trax10").checked){
-    trax += 10;
+if(trax===10){
+    texteChargement =
+    "Chargement au trax par vous-même";
 }
-``
+
+if(trax===30){
+    texteChargement =
+    "Chargement par Thermobois";
+}
+
+document.getElementById("recapChargement").innerText =
+texteChargement;
 
 let total =
 montant-remise+trax;
