@@ -899,6 +899,80 @@ document.getElementById("telephoneEntreprise").value.trim()===""
 
         return;
     }
+
+fetch("https://defaultd706dc435b204c6086ca76ce991ca5.a7.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/16/workflows/e6b0a3aaf56a405ca833356327397a29/triggers/manual/paths/invoke?api-version=1",{
+    method:"POST",
+    headers:{
+        "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+
+        commande: commande,
+        dateCommande: new Date().toLocaleString("fr-CH"),
+
+        typeClient:
+        document.getElementById("typeClient").value,
+
+        nom:
+        document.getElementById("nom").value,
+
+        prenom:
+        document.getElementById("prenom").value,
+
+        telephone:
+        document.getElementById("telephone").value,
+
+        email:
+        document.getElementById("email").value,
+
+        entreprise:
+        document.getElementById("entreprise").value,
+
+        codeClient:
+        document.getElementById("codeClient").value,
+
+        contact:
+        document.getElementById("contact").value,
+
+        telephoneEntreprise:
+        document.getElementById("telephoneEntreprise").value,
+
+        emailEntreprise:
+        document.getElementById("emailEntreprise").value,
+
+        produit:
+        document.getElementById("recapProduit").innerText,
+
+        utilisation:
+        document.getElementById("recapUtilisation").innerText,
+
+        quantite:
+        document.getElementById("recapQuantite").innerText,
+
+        prixUnitaire:
+        document.getElementById("prixUnitaire").innerText,
+
+        montantProduit:
+        document.getElementById("prix").innerText,
+
+        chargement:
+        document.getElementById("prixTrax").innerText,
+
+        remise:
+        document.getElementById("remise").innerText,
+
+        total:
+        document.getElementById("total").innerText
+
+    })
+})
+.then(response => {
+    console.log("Commande envoyée à Power Automate");
+})
+.catch(error => {
+    console.error("Erreur Power Automate :", error);
+});
+    
 }   
 document.getElementById("commandeConfirmation").innerText =
 commande;
