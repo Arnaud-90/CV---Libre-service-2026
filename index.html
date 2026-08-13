@@ -334,7 +334,7 @@ Equivalent :
 <input
 class="checkbox"
 type="checkbox"
-id="trax"
+id="trax30"
 onchange="calculer()">
 Chargement au trax par Thermobois (+ CHF 30)
 </label>
@@ -343,7 +343,7 @@ Chargement au trax par Thermobois (+ CHF 30)
 <input
 class="checkbox"
 type="checkbox"
-id="trax"
+id="trax10"
 onchange="calculer()">
 Chargement au trax par vous même (+ CHF 10)
 </label>    
@@ -783,7 +783,10 @@ document.getElementById("statut").innerText=
 }
 
 let trax =
-document.getElementById("trax").checked ? 30 : 0;
+document.getElementById("trax30").checked ? 30 : 0;
+
+let trax =
+document.getElementById("trax10").checked ? 10 : 0;
 
 let total =
 montant-remise+trax;
