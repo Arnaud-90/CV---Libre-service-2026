@@ -782,11 +782,16 @@ document.getElementById("statut").innerText=
 "Client";
 }
 
-let trax =
-document.getElementById("trax30").checked ? 30 : 0;
+let trax = 0;
 
-let trax =
-document.getElementById("trax10").checked ? 10 : 0;
+if(document.getElementById("trax30").checked){
+    trax += 30;
+}
+
+if(document.getElementById("trax10").checked){
+    trax += 10;
+}
+``
 
 let total =
 montant-remise+trax;
