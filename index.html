@@ -152,6 +152,31 @@ oninput="calculer()">
     <option value="trifin">Tri fin</option>
 </select>
 
+<h3>Utilisation des copeaux</h3>
+
+<label>
+<input
+class="checkbox"
+type="radio"
+name="utilisation"
+value="sol"
+checked
+onchange="calculer()">
+
+Couverture de sol
+</label>
+
+<label>
+<input
+class="checkbox"
+type="radio"
+name="utilisation"
+value="chauffage"
+onchange="calculer()">
+
+Chauffage
+</label>
+    
 <div id="zoneCopeaux">
 
 <h3>Volume ou quantité</h3>
@@ -345,6 +370,11 @@ Commande :
 Produit :
 <span id="recapProduit"></span>
 
+<br><br>
+
+Utilisation :
+<span id="recapUtilisation"></span>
+    
 <br><br>
 
 Quantité :
@@ -614,6 +644,16 @@ if(typeClient==="entreprise"){
 }
     let produit =
 document.getElementById("produit").value;
+
+    let utilisation =
+document.querySelector(
+'input[name="utilisation"]:checked'
+).value;
+
+document.getElementById("recapUtilisation").innerText =
+(utilisation==="chauffage")
+? "Chauffage"
+: "Couverture de sol";
 
 if(produit==="trifin"){
 
