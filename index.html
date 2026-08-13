@@ -409,11 +409,6 @@ Chargement :
 CHF <span id="prixTrax">0.00</span>
 
 <br><br>
-    
-Statut :
-<span id="statut">Client</span>
-
-<br><br>
 
 Type de client :
 <span id="recapTypeClient">
@@ -777,19 +772,15 @@ document.getElementById("recapTypeClient").innerText =
 ? "Entreprise / Compte client"
 : "Particulier";
 
-if(
+let remise =
+(
 document.getElementById("codePromo")
 .value.trim().toUpperCase()
 ==="THERMO1989"
-){
-remise=montant;
-document.getElementById("statut").innerText=
-"Personnel";
-}
-else{
-document.getElementById("statut").innerText=
-"Client";
-}
+)
+? montant
+: 0;
+
 
 let trax =
 parseFloat(
