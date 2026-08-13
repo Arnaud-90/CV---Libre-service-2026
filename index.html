@@ -899,29 +899,6 @@ document.getElementById("telephoneEntreprise").value.trim()===""
 
         return;
     }
-
-fetch("TON_URL_POWER_AUTOMATE",{
-    method:"POST",
-    headers:{
-        "Content-Type":"application/json"
-    },
-    body:JSON.stringify({
-        commande: commande,
-        typeClient: document.getElementById("typeClient").value,
-        nom: document.getElementById("nom").value,
-        prenom: document.getElementById("prenom").value,
-        entreprise: document.getElementById("entreprise").value,
-        codeClient: document.getElementById("codeClient").value,
-        email:
-            document.getElementById("typeClient").value==="entreprise"
-            ? document.getElementById("emailEntreprise").value
-            : document.getElementById("email").value,
-        produit: document.getElementById("recapProduit").innerText,
-        quantite: document.getElementById("recapQuantite").innerText,
-        total: document.getElementById("total").innerText
-    })
-});
-    
 }   
 document.getElementById("commandeConfirmation").innerText =
 commande;
@@ -946,6 +923,8 @@ calculer();
 </script>
 
 </body>
+</html>
+</html>
 </html>
 </html>
 </html>
