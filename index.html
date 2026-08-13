@@ -765,17 +765,14 @@ document.getElementById("recapProduit").innerText=
 }
 }
 
-let remise=0;
-
-document.getElementById("recapTypeClient").innerText =
-(typeClient==="entreprise")
-? "Entreprise / Compte client"
-: "Particulier";
-
-if(
+let remise =
+(
 document.getElementById("codePromo")
 .value.trim().toUpperCase()
 ==="THERMO1989"
+)
+? montant
+: 0;
 ){
 
 let trax =
