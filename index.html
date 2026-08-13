@@ -844,145 +844,170 @@ quantiteTexte;
     
 function payer(){
 
-if(
-document.getElementById("typeClient").value==="particulier"
-){
+    // Vérification particulier
 
     if(
-    document.getElementById("nom").value.trim()==="" ||
-    document.getElementById("prenom").value.trim()==="" ||
-    document.getElementById("telephone").value.trim()===""
+        document.getElementById("typeClient").value==="particulier"
     ){
 
-        alert("Veuillez renseigner les champs obligatoires.");
+        if(
+            document.getElementById("nom").value.trim()==="" ||
+            document.getElementById("prenom").value.trim()==="" ||
+            document.getElementById("telephone").value.trim()==="" ||
+            document.getElementById("email").value.trim()===""
+        ){
+
+            alert("Veuillez renseigner les champs obligatoires.");
+            return;
+        }
+    }
+
+    // Vérification CGV
+
+    if(
+        !document.getElementById("conditions").checked
+    ){
+        alert("Veuillez accepter les conditions générales.");
         return;
     }
 
-}
+    // Vérification entreprise
 
-if(
-!document.getElementById("conditions").checked
-){
-alert("Veuillez accepter les conditions générales.");
-return;
-}
+    if(
+        document.getElementById("typeClient").value==="entreprise"
+    ){
 
+        let codeClient =
+        document.getElementById("codeClient")
+        .value
+        .trim()
+        .toUpperCase();
 
-if(
-document.getElementById("typeClient").value==="entreprise"
-){
+        if(!comptesClients.includes(codeClient)){
 
-let codeClient =
-document.getElementById("codeClient")
-.value
-.trim()
-.toUpperCase();
+            alert("Code compte client non reconnu.");
+            return;
+        }
 
-if(!comptesClients.includes(codeClient)){
+        if(
+            document.getElementById("entreprise").value.trim()==="" ||
+            document.getElementById("codeClient").value.trim()==="" ||
+            document.getElementById("contact").value.trim()==="" ||
+            document.getElementById("telephoneEntreprise").value.trim()==="" ||
+            document.getElementById("emailEntreprise").value.trim()===""
+        ){
 
-    alert(
-    "Code compte client non reconnu."
-    );
+            alert(
+                "Veuillez renseigner tous les champs obligatoires."
+            );
 
-    return;
-}
-     
-   if(
-document.getElementById("entreprise").value.trim()==="" ||
-document.getElementById("codeClient").value.trim()==="" ||
-document.getElementById("contact").value.trim()==="" ||
-document.getElementById("telephoneEntreprise").value.trim()===""
-){
-        alert(
-        "Veuillez renseigner le nom de l'entreprise et le code client."
-        );
-
-        return;
+            return;
+        }
     }
+    
+alert("Envoi Power Automate");
+    
+    // Envoi vers Power Automate
 
-fetch("https://defaultd706dc435b204c6086ca76ce991ca5.a7.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/16/workflows/e6b0a3aaf56a405ca833356327397a29/triggers/manual/paths/invoke?api-version=1",{
-    method:"POST",
-    headers:{
-        "Content-Type":"application/json"
-    },
-    body:JSON.stringify({
+    fetch("https://defaultd706dc435b204c6086ca76ce991ca5.a7.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/16/workflows/e6b0a3aaf56a405ca833356327397a29/triggers/manual/paths/invoke?api-version=1",{
 
-        commande: commande,
-        dateCommande: new Date().toLocaleString("fr-CH"),
+        method:"POST",
 
-        typeClient:
-        document.getElementById("typeClient").value,
+        headers:{
+            "Content-Type":"application/json"
+        },
 
-        nom:
-        document.getElementById("nom").value,
+        body:JSON.stringify({
 
-        prenom:
-        document.getElementById("prenom").value,
+            commande: commande,
 
-        telephone:
-        document.getElementById("telephone").value,
+            dateCommande:
+            new Date().toLocaleString("fr-CH"),
 
-        email:
-        document.getElementById("email").value,
+            typeClient:
+            document.getElementById("typeClient").value,
 
-        entreprise:
-        document.getElementById("entreprise").value,
+            nom:
+            document.getElementById("nom").value,
 
-        codeClient:
-        document.getElementById("codeClient").value,
+            prenom:
+            document.getElementById("prenom").value,
 
-        contact:
-        document.getElementById("contact").value,
+            telephone:
+            document.getElementById("telephone").value,
 
-        telephoneEntreprise:
-        document.getElementById("telephoneEntreprise").value,
+            email:
+            document.getElementById("email").value,
 
-        emailEntreprise:
-        document.getElementById("emailEntreprise").value,
+            entreprise:
+            document.getElementById("entreprise").value,
 
-        produit:
-        document.getElementById("recapProduit").innerText,
+            codeClient:
+            document.getElementById("codeClient").value,
 
-        utilisation:
-        document.getElementById("recapUtilisation").innerText,
+            contact:
+            document.getElementById("contact").value,
 
-        quantite:
-        document.getElementById("recapQuantite").innerText,
+            telephoneEntreprise:
+            document.getElementById("telephoneEntreprise").value,
 
-        prixUnitaire:
-        document.getElementById("prixUnitaire").innerText,
+            emailEntreprise:
+            document.getElementById("emailEntreprise").value,
 
-        montantProduit:
-        document.getElementById("prix").innerText,
+            produit:
+            document.getElementById("recapProduit").innerText,
 
-        chargement:
-        document.getElementById("prixTrax").innerText,
+            utilisation:
+            document.getElementById("recapUtilisation").innerText,
 
-        remise:
-        document.getElementById("remise").innerText,
+            quantite:
+            document.getElementById("recapQuantite").innerText,
 
-        total:
-        document.getElementById("total").innerText
+            prixUnitaire:
+            document.getElementById("prixUnitaire").innerText,
+
+            montantProduit:
+            document.getElementById("prix").innerText,
+
+            chargement:
+            document.getElementById("prixTrax").innerText,
+
+            remise:
+            document.getElementById("remise").innerText,
+
+            total:
+            document.getElementById("total").innerText
+
+        })
 
     })
-})
-.then(response => {
-    console.log("Commande envoyée à Power Automate");
-})
-.catch(error => {
-    console.error("Erreur Power Automate :", error);
-});
-    
-}   
-document.getElementById("commandeConfirmation").innerText =
-commande;
+    .then(response => {
 
-document.getElementById("success").style.display="block";
+        console.log("Statut :", response.status);
 
-window.scrollTo({
-top:document.body.scrollHeight,
-behavior:"smooth"
-});
+    })
+    .catch(error => {
+
+        console.error(
+            "Erreur Power Automate :",
+            error
+        );
+
+    });
+
+    // Confirmation commande
+
+    document.getElementById(
+        "commandeConfirmation"
+    ).innerText = commande;
+
+    document.getElementById("success").style.display =
+    "block";
+
+    window.scrollTo({
+        top:document.body.scrollHeight,
+        behavior:"smooth"
+    });
 
 }
 
