@@ -405,6 +405,16 @@ CHF <span id="remise">0.00</span>
 
 <br><br>
 
+Chargement :
+CHF <span id="prixTrax">0.00</span>
+
+<br><br>
+    
+Statut :
+<span id="statut">Client</span>
+
+<br><br>
+
 Type de client :
 <span id="recapTypeClient">
 Particulier
@@ -642,9 +652,6 @@ document.querySelector(
 'input[name="utilisation"]:checked'
 ).value;
 
-console.log(
-document.querySelector('input[name="utilisation"]:checked')
-);
 document.getElementById("recapUtilisation").innerText =
 (utilisation==="chauffage")
 ? "Chauffage"
@@ -763,19 +770,26 @@ document.getElementById("recapProduit").innerText=
 }
 }
 
-let remise =
-(
-document.getElementById("codePromo")
-.value.trim().toUpperCase()
-==="THERMO1989"
-)
-? montant
-: 0;
+let remise=0;
 
 document.getElementById("recapTypeClient").innerText =
 (typeClient==="entreprise")
 ? "Entreprise / Compte client"
 : "Particulier";
+
+if(
+document.getElementById("codePromo")
+.value.trim().toUpperCase()
+==="THERMO1989"
+){
+remise=montant;
+document.getElementById("statut").innerText=
+"Personnel";
+}
+else{
+document.getElementById("statut").innerText=
+"Client";
+}
 
 let trax =
 parseFloat(
@@ -839,11 +853,6 @@ if(typeClient==="entreprise"){
 
 document.getElementById("recapQuantite").innerText =
 quantiteTexte;
-
-document.getElementById("recapQuantite").innerText =
-quantiteTexte;
-
-console.log("calculer OK");
 
 }
     
@@ -928,4 +937,5 @@ calculer();
 </script>
 
 </body>
+</html>
 </html>
