@@ -810,13 +810,10 @@ if(trax===30){
 }
 
 document.getElementById("recapChargement").innerText =
-texteChargement;
+texteChargement + " / CHF " + trax;
 
 document.getElementById("prixTrax").innerText =
 trax.toFixed(2);
-
-document.getElementById("recapChargement").innerText =
-texteChargement;
 
 let total =
 montant-remise+trax;
@@ -873,6 +870,12 @@ if(typeClient==="entreprise"){
 
 }
 
+document.getElementById("recapEntreprise").innerText =
+document.getElementById("entreprise").value;
+
+document.getElementById("recapCodeClient").innerText =
+document.getElementById("codeClient").value;
+    
 document.getElementById("recapQuantite").innerText =
 quantiteTexte;
 
