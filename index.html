@@ -777,20 +777,14 @@ document.getElementById("codePromo")
 .value.trim().toUpperCase()
 ==="THERMO1989"
 ){
-remise=montant;
-document.getElementById("statut").innerText=
-"Personnel";
-}
-else{
-document.getElementById("statut").innerText=
-"Client";
+    remise=montant;
 }
 
 let trax =
 parseFloat(
 document.getElementById("chargement").value
 ) || 0;
-
+    
 let total =
 montant-remise+trax;
 
