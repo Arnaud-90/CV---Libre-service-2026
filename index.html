@@ -870,11 +870,21 @@ if(typeClient==="entreprise"){
 
 }
 
-document.getElementById("recapEntreprise").innerText =
-document.getElementById("entreprise").value;
+const recapEntreprise =
+document.getElementById("recapEntreprise");
 
-document.getElementById("recapCodeClient").innerText =
-document.getElementById("codeClient").value;
+if(recapEntreprise){
+    recapEntreprise.innerText =
+    document.getElementById("entreprise").value;
+}
+
+const recapCodeClient =
+document.getElementById("recapCodeClient");
+
+if(recapCodeClient){
+    recapCodeClient.innerText =
+    document.getElementById("codeClient").value;
+}
     
 document.getElementById("recapQuantite").innerText =
 quantiteTexte;
