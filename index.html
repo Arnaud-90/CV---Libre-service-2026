@@ -409,6 +409,11 @@ Chargement :
 CHF <span id="prixTrax">0.00</span>
 
 <br><br>
+    
+Statut :
+<span id="statut">Client</span>
+
+<br><br>
 
 Type de client :
 <span id="recapTypeClient">
@@ -763,16 +768,28 @@ document.getElementById("recapProduit").innerText=
 "Copeaux non criblés";
 
 }
+}
 
-let remise =
-(
+let remise=0;
+
+document.getElementById("recapTypeClient").innerText =
+(typeClient==="entreprise")
+? "Entreprise / Compte client"
+: "Particulier";
+
+if(
 document.getElementById("codePromo")
 .value.trim().toUpperCase()
 ==="THERMO1989"
-)
-? montant
-: 0;
-
+){
+remise=montant;
+document.getElementById("statut").innerText=
+"Personnel";
+}
+else{
+document.getElementById("statut").innerText=
+"Client";
+}
 
 let trax =
 parseFloat(
