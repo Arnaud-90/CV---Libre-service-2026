@@ -481,16 +481,17 @@ async function chargerEntreprise(){
     try{
 
         const reponse = await fetch(
-        "URL_DE_TON_FLUX_RECHERCHE",
-        {
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body:JSON.stringify({
-                codeClient: codeClient
-            })
-        });
+"https://defaultd706dc435b204c6086ca76ce991ca5.a7.environment.api.powerplatform.com/....",
+{
+    method:"POST",
+    headers:{
+        "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+        codeClient: codeClient
+    })
+}
+);
 
         const data = await reponse.json();
 
