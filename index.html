@@ -129,7 +129,7 @@ button{
 type="text"
 id="codeClient"
 placeholder="Ex : PAYSAGE01"
-oninput="calculer()">
+oninput="calculer();chargerEntreprise()">
 
 <div id="etatCompteClient"></div>
 
@@ -467,6 +467,56 @@ Numéro :
 
 <script>
 
+async function chargerEntreprise(){
+
+    let codeClient =
+    document.getElementById("codeClient")
+    .value
+    .trim();
+
+    if(codeClient===""){
+        return;
+    }
+
+    try{
+
+        const reponse = await fetch(
+        "URL_DE_TON_FLUX_RECHERCHE",
+        {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                codeClient: codeClient
+            })
+        });
+
+        const data = await reponse.json();
+
+        document.getElementById("entreprise").value =
+        data.entreprise || "";
+
+        document.getElementById("contact").value =
+        data.contact || "";
+
+        document.getElementById("telephoneEntreprise").value =
+        data.telephone || "";
+
+        document.getElementById("emailEntreprise").value =
+        data.email || "";
+
+    }
+    catch(error){
+
+        console.error(
+        "Erreur recherche client :",
+        error
+        );
+
+    }
+}
+    
 function estCompteClientValide(){
 
     let codeClient =
