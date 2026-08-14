@@ -470,14 +470,14 @@ Numéro :
 async function chargerEntreprise(){
 
     let codeClient =
-    document.getElementById("codeClient")
-    .value
-    .trim()
-    .toUpperCase();
+document.getElementById("codeClient")
+.value
+.trim()
+.toUpperCase();
 
-    if(codeClient===""){
-        return;
-    }
+if(codeClient.length < 9){
+    return;
+}
 
     try{
 
