@@ -472,7 +472,8 @@ async function chargerEntreprise(){
     let codeClient =
     document.getElementById("codeClient")
     .value
-    .trim();
+    .trim()
+    .toUpperCase();
 
     if(codeClient===""){
         return;
@@ -481,19 +482,22 @@ async function chargerEntreprise(){
     try{
 
         const reponse = await fetch(
-"https://defaultd706dc435b204c6086ca76ce991ca5.a7.environment.api.powerplatform.com/....",
-{
-    method:"POST",
-    headers:{
-        "Content-Type":"application/json"
-    },
-    body:JSON.stringify({
-        codeClient: codeClient
-    })
-}
-);
+        "https://defaultd706dc435b204c6086ca76ce991ca5.a7.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/04/workflows/1ddb7fb7f0fc47a19896006c726ea700/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=VJi_adOkLvZMpl5nLNyYQLrUaDgqsQTQyiwvybjsCu8",
+        {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                codeClient: codeClient
+            })
+        });
+
+        console.log("Statut :", reponse.status);
 
         const data = await reponse.json();
+
+        console.log("Client trouvé :", data);
 
         document.getElementById("entreprise").value =
         data.entreprise || "";
@@ -511,8 +515,8 @@ async function chargerEntreprise(){
     catch(error){
 
         console.error(
-        "Erreur recherche client :",
-        error
+            "Erreur recherche client :",
+            error
         );
 
     }
