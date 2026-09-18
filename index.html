@@ -1070,13 +1070,12 @@ alert("Envoi Power Automate");
 
 document.getElementById("totalTwint").innerText =
 document.getElementById("total").innerText;
-       
-    document.getElementById(
-        "commandeConfirmation"
-    ).innerText = commande;
 
-    document.getElementById("success").style.display =
-    "block";
+document.getElementById("commandeConfirmation").innerText =
+commande;
+
+document.getElementById("success").style.display =
+"block";
 
     window.scrollTo({
         top:document.body.scrollHeight,
