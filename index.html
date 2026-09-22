@@ -450,30 +450,16 @@ Payer (simulation)
 
 <div class="success" id="success">
 
-    <h3>✅ Commande enregistrée</h3>
+✅ Paiement accepté
 
-    <p>
-        Veuillez maintenant effectuer votre paiement avec TWINT.
-    </p>
+<br><br>
 
-    <p>
-        Scannez le QR Code TWINT affiché ci-dessous.
-    </p>
+Commande enregistrée.
 
-    <img
-        src="QR TWINT Courchavon.png"
-        alt="QR TWINT"
-        style="max-width:250px;width:100%;display:block;margin:auto;">
+<br><br>
 
-    <p>
-        Montant à payer :
-        <strong>
-            CHF <span andeConfirmation"></strong>
-    </p>
-
-    <p>
-        Après paiement, vous pouvez procéder au chargement.
-    </p>
+Numéro :
+<strong id="commandeConfirmation"></strong>
 
 </div>
 
@@ -1066,11 +1052,12 @@ alert("Envoi Power Automate");
 
     // Confirmation commande
 
-document.getElementById("commandeConfirmation").innerText =
-commande;
+    document.getElementById(
+        "commandeConfirmation"
+    ).innerText = commande;
 
-document.getElementById("success").style.display =
-"block";
+    document.getElementById("success").style.display =
+    "block";
 
     window.scrollTo({
         top:document.body.scrollHeight,
