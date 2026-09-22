@@ -450,47 +450,20 @@ Payer (simulation)
 
 <div class="success" id="success">
 
-    <div id="confirmationParticulier">
+    <h3 id="titreConfirmation"></h3>
 
-        <h3>✅ Commande enregistrée</h3>
+    <p id="texteConfirmation"></p>
 
-        <p>
-            Veuillez maintenant effectuer votre paiement avec TWINT.
-        </p>
+    <img
+        id="qrTwint"
+        src="QR TWINT Courchavon.png"
+        alt="QR TWINT"
+        style="max-width:250px;width:100%;display:block;margin:auto;">
 
-        <p>
-            Scannez le QR Code TWINT affiché sur l'écran ou à proximité de la zone de chargement.
-        </p>
-
-        <img
-            src="QR TWINT Courchavon.png"
-            alt="QR TWINT"
-            style="max-width:250px;width:100%;display:block;margin:auto;">
-
-        <p>
-            Numéro de commande :
-            <strong id="commandeConfirmation"></strongv id="confirmationEntreprise" style="display:none;">
-
-        <h3>✅ Commande enregistrée</h3>
-
-        <p>
-            Votre commande a été enregistrée sur votre compte client.
-        </p>
-
-        <p>
-            Numéro de commande :
-            <strong id="commandeConfirmationEntreprise"></strong>
-        </p>
-
-        <p>
-            La commande sera traitée conformément à vos conditions commerciales Thermobois.
-        </p>
-
-        <p>
-            Vous pouvez procéder au chargement.
-        </p>
-
-    </div>
+    <p>
+        Numéro de commande :
+        <strong id="commandeConfirmation"></strong>
+    </p>
 
 </div>
 
@@ -1089,16 +1062,34 @@ alert("Envoi Power Automate");
 document.getElementById("typeClient").value==="entreprise"
 ){
 
-    document.getElementById("confirmationParticulier").style.display =
+    document.getElementById("titreConfirmation").innerText =
+    "✅ Commande enregistrée";
+
+    document.getElementById("texteConfirmation").innerText =
+    "Votre commande a été enregistrée sur votre compte client. Vous pouvez procéder au chargement.";
+
+    document.getElementById("qrTwint").style.display =
     "none";
 
-    document.getElementById("confirmationEntreprise").style.display =
+}
+else{
+
+    document.getElementById("titreConfirmation").innerText =
+    "✅ Commande enregistrée";
+
+    document.getElementById("texteConfirmation").innerText =
+    "Veuillez maintenant effectuer votre paiement avec TWINT puis procéder au chargement.";
+
+    document.getElementById("qrTwint").style.display =
     "block";
 
-    document.getElementById("commandeConfirmationEntreprise").innerText =
-    commande;
+}
+
+document.getElementById("commandeConfirmation").innerText =
+commande;
 
 }
+    
 else{
 
     document.getElementById("confirmationParticulier").style.display =
