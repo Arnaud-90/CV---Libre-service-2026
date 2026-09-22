@@ -450,23 +450,51 @@ Payer (simulation)
 
 <div class="success" id="success">
 
-✅ Commande enregistrée
+    <div id="confirmationParticulier">
 
-<br><br>
+        <h3>✅ Commande enregistrée</h3>
 
-Veuillez procéder au paiement au moyen du QR code twint 
+        <p>
+            Veuillez maintenant effectuer votre paiement avec TWINT.
+        </p>
 
-<br><br>
+        <p>
+            Scannez le QR Code TWINT affiché sur l'écran ou à proximité de la zone de chargement.
+        </p>
 
-Numéro :
-<strong id="commandeConfirmation"></strong>
+        <img
+            src="QR TWINT Courchavon.png"
+            alt="QR TWINT"
+            style="max-width:250px;width:100%;display:block;margin:auto;">
 
-<br><br>
+        <p>
+            Numéro de commande :
+            <strong id="commandeConfirmation"></strong>
+        </p>
 
-Merci pour votre achat
+        <p>
+            Après paiement, vous pouvez procande enregistrée</h3>
+
+        <p>
+            Votre commande a été enregistrée sur votre compte client.
+        </p>
+
+        <p>
+            Numéro de commande :
+            <strong id="commandeConfirmationEntreprise"></strong>
+        </p>
+
+        <p>
+            La commande sera traitée conformément à vos conditions commerciales Thermobois.
+        </p>
+
+        <p>
+            Vous pouvez procéder au chargement.
+        </p>
+
+    </div>
 
 </div>
-
 </div>
 
 <script>
@@ -1059,6 +1087,33 @@ alert("Envoi Power Automate");
     document.getElementById(
         "commandeConfirmation"
     ).innerText = commande;
+
+    if(
+document.getElementById("typeClient").value==="entreprise"
+){
+
+    document.getElementById("confirmationParticulier").style.display =
+    "none";
+
+    document.getElementById("confirmationEntreprise").style.display =
+    "block";
+
+    document.getElementById("commandeConfirmationEntreprise").innerText =
+    commande;
+
+}
+else{
+
+    document.getElementById("confirmationParticulier").style.display =
+    "block";
+
+    document.getElementById("confirmationEntreprise").style.display =
+    "none";
+
+    document.getElementById("commandeConfirmation").innerText =
+    commande;
+
+}
 
     document.getElementById("success").style.display =
     "block";
