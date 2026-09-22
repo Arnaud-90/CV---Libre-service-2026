@@ -448,7 +448,7 @@ J'accepte les conditions générales de vente
 Payer (simulation)
 </button>
 
-<div class="success" id="success">
+<div id="messageParticulier">
 
 ✅ Commande enregistrée
 
@@ -467,6 +467,19 @@ Merci pour votre achat
 
 </div>
 
+<div id="messageEntrepriseConfirmation"
+style="display:none;">
+ 
+✅ Commande enregistrée
+ 
+<br><br>
+ 
+Votre commande a été enregistrée sur votre compte client.
+
+<br><br>
+
+Merci pour votre achat   
+ 
 </div>
 
 <script>
@@ -1060,6 +1073,31 @@ alert("Envoi Power Automate");
         "commandeConfirmation"
     ).innerText = commande;
 
+if(
+document.getElementById("typeClient").value==="entreprise"
+){
+
+    document.getElementById(
+    "messageParticulier"
+    ).style.display = "none";
+
+    document.getElementById(
+    "messageEntrepriseConfirmation"
+    ).style.display = "block";
+
+}
+else{
+
+    document.getElementById(
+    "messageParticulier"
+    ).style.display = "block";
+
+    document.getElementById(
+    "messageEntrepriseConfirmation"
+    ).style.display = "none";
+
+}
+    
     document.getElementById("success").style.display =
     "block";
 
