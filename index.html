@@ -1054,7 +1054,7 @@ alert("Envoi Power Automate");
 
     });
 
-    // Confirmation commande
+  // Confirmation commande
 
 if(
 document.getElementById("typeClient").value==="entreprise"
@@ -1066,6 +1066,9 @@ document.getElementById("typeClient").value==="entreprise"
     document.getElementById("texteConfirmation").innerText =
     "Votre commande a été enregistrée sur votre compte client. Vous pouvez procéder au chargement.";
 
+    document.getElementById("qrTwint").style.display =
+    "none";
+
 }
 else{
 
@@ -1075,19 +1078,9 @@ else{
     document.getElementById("texteConfirmation").innerText =
     "Veuillez maintenant effectuer votre paiement avec TWINT puis procéder au chargement.";
 
-if(
-document.getElementById("typeClient").value==="entreprise"
-){
-
-    document.getElementById("qrTwint").style.display =
-    "none";
-
-}
-else{
-
     document.getElementById("qrTwint").style.display =
     "block";
-    
+
 }
 
 document.getElementById("commandeConfirmation").innerText =
@@ -1096,10 +1089,10 @@ commande;
 document.getElementById("success").style.display =
 "block";
 
-    window.scrollTo({
-        top:document.body.scrollHeight,
-        behavior:"smooth"
-    });
+window.scrollTo({
+    top:document.body.scrollHeight,
+    behavior:"smooth"
+});
 
 }
 
