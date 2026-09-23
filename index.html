@@ -450,20 +450,18 @@ Payer (simulation)
 
 <div class="success" id="success">
 
-    <h3 id="titreConfirmation"></h3>
+✅ Paiement accepté
 
-    <p id="texteConfirmation"></p>
+<br><br>
 
-    <img
-        id="qrTwint"
-        src="QR TWINT Courchavon.png"
-        alt="QR TWINT"
-        style="max-width:250px;width:100%;display:block;margin:auto;">
+Commande enregistrée.
 
-    <p>
-        Numéro de commande :
-        <strong id="commandeConfirmation"></strong>
-    </p>
+<br><br>
+
+Numéro :
+<strong id="commandeConfirmation"></strong>
+
+</div>
 
 </div>
 
@@ -1057,51 +1055,6 @@ alert("Envoi Power Automate");
     document.getElementById(
         "commandeConfirmation"
     ).innerText = commande;
-
-    if(
-document.getElementById("typeClient").value==="entreprise"
-){
-
-    document.getElementById("titreConfirmation").innerText =
-    "✅ Commande enregistrée";
-
-    document.getElementById("texteConfirmation").innerText =
-    "Votre commande a été enregistrée sur votre compte client. Vous pouvez procéder au chargement.";
-
-    document.getElementById("qrTwint").style.display =
-    "none";
-
-}
-else{
-
-    document.getElementById("titreConfirmation").innerText =
-    "✅ Commande enregistrée";
-
-    document.getElementById("texteConfirmation").innerText =
-    "Veuillez maintenant effectuer votre paiement avec TWINT puis procéder au chargement.";
-
-    document.getElementById("qrTwint").style.display =
-    "block";
-
-}
-
-document.getElementById("commandeConfirmation").innerText =
-commande;
-
-}
-    
-else{
-
-    document.getElementById("confirmationParticulier").style.display =
-    "block";
-
-    document.getElementById("confirmationEntreprise").style.display =
-    "none";
-
-    document.getElementById("commandeConfirmation").innerText =
-    commande;
-
-}
 
     document.getElementById("success").style.display =
     "block";
