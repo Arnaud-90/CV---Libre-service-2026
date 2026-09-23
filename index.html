@@ -454,11 +454,14 @@ Payer (simulation)
 
     <p id="texteConfirmation"></p>
 
-    QR TWINT Courchavon.png
+    <img
+        src="QR TWINT Courchavon.png"
+        alt="QR TWINT"
+        style="max-width:250px;width:100%;display:block;margin:auto;">
 
     <p>
         Numéro de commande :
-        <strong id="commandeConfirmation"></strong>
+        <strong id="commandeConfirmation"></strong
     </p>
 
 </div>
@@ -1052,12 +1055,32 @@ alert("Envoi Power Automate");
 
     // Confirmation commande
 
-    document.getElementById(
-        "commandeConfirmation"
-    ).innerText = commande;
+if(
+document.getElementById("typeClient").value==="entreprise"
+){
 
-    document.getElementById("success").style.display =
-    "block";
+    document.getElementById("titreConfirmation").innerText =
+    "✅ Commande enregistrée";
+
+    document.getElementById("texteConfirmation").innerText =
+    "Votre commande a été enregistrée sur votre compte client. Vous pouvez procéder au chargement.";
+
+}
+else{
+
+    document.getElementById("titreConfirmation").innerText =
+    "✅ Commande enregistrée";
+
+    document.getElementById("texteConfirmation").innerText =
+    "Veuillez maintenant effectuer votre paiement avec TWINT puis procéder au chargement.";
+
+}
+
+document.getElementById("commandeConfirmation").innerText =
+commande;
+
+document.getElementById("success").style.display =
+"block";
 
     window.scrollTo({
         top:document.body.scrollHeight,
