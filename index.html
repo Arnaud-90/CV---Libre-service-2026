@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thermobois SA - Commande de copeaux</title>
 
+input[readonly]{
+    background:#f5f5f5;
+    color:#555;
+    cursor:not-allowed;
+}
+    
 <style>
 body{
     font-family:Arial,sans-serif;
@@ -471,8 +477,6 @@ Payer (simulation)
 
 <script>
 
-let clientReconnu = false;    
-    
 async function chargerEntreprise(){
 
     let codeClient =
@@ -482,8 +486,6 @@ document.getElementById("codeClient")
 .toUpperCase();
 
 if(codeClient.length < 3){
-
-    clientReconnu = false;
 
     document.getElementById("entreprise").value = "";
     document.getElementById("contact").value = "";
@@ -511,9 +513,7 @@ if(codeClient.length < 3){
 
         const data = await reponse.json();
 
-       if(data.entreprise && data.entreprise.trim() !== ""){
-
-    clientReconnu = true;
+     if(data.entreprise && data.entreprise.trim() !== ""){
 
     document.getElementById("entreprise").value =
     data.entreprise || "";
@@ -530,7 +530,14 @@ if(codeClient.length < 3){
 }
 else{
 
-    clientReconnu = false;
+    document.getElementById("entreprise").value = "";
+    document.getElementById("contact").value = "";
+    document.getElementById("telephoneEntreprise").value = "";
+    document.getElementById("emailEntreprise").value = "";
+
+}
+
+else{
 
     document.getElementById("entreprise").value = "";
     document.getElementById("contact").value = "";
@@ -544,8 +551,6 @@ console.log(data);
         
 }        
     catch(error){
-
-        clientReconnu = false;
         
         console.error(
             "Erreur recherche client :",
