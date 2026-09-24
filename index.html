@@ -511,7 +511,7 @@ if(codeClient.length < 3){
 
         const data = await reponse.json();
 
-       if(data.entreprise){
+       if(data.entreprise && data.entreprise.trim() !== ""){
 
     clientReconnu = true;
 
@@ -538,6 +538,8 @@ else{
     document.getElementById("emailEntreprise").value = "";
 
 }
+
+}        
     catch(error){
 
         clientReconnu = false;
