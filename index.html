@@ -689,7 +689,9 @@ document.getElementById("typeClient").value;
 
 if(typeClient==="entreprise"){
 
-    if(clientReconnu){
+    if(
+        document.getElementById("entreprise").value.trim() !== ""
+    ){
 
         document.getElementById("etatCompteClient").innerHTML =
         "<span style='color:green'>✅ Compte client reconnu</span>";
