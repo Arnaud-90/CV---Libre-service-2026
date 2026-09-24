@@ -462,7 +462,7 @@ Payer (simulation)
 
     <p>
         Numéro de commande :
-        <strong id="commandeConfirmation"></strong
+        <strong id="commandeConfirmation"></strong>
     </p>
 
 </div>
@@ -481,7 +481,15 @@ document.getElementById("codeClient")
 .trim()
 .toUpperCase();
 
-if(codeClient.length < 9){
+if(codeClient.length < 3){
+
+    clientReconnu = false;
+
+    document.getElementById("entreprise").value = "";
+    document.getElementById("contact").value = "";
+    document.getElementById("telephoneEntreprise").value = "";
+    document.getElementById("emailEntreprise").value = "";
+
     return;
 }
 
@@ -530,10 +538,10 @@ else{
     document.getElementById("emailEntreprise").value = "";
 
 }
-``
     catch(error){
 
         clientReconnu = false;
+        
         console.error(
             "Erreur recherche client :",
             error
