@@ -121,26 +121,26 @@ button{
 
 <h3>Informations entreprise</h3>
 
-<label>Entreprise *</label>
-<input type="text" id="entreprise">
-
 <label>Code compte client *</label>
 <input
 type="text"
 id="codeClient"
 placeholder="Ex : PAYSAGE01"
 oninput="calculer();chargerEntreprise()">
-
+    
 <div id="etatCompteClient"></div>
 
+<label>Entreprise *</label>
+<input type="text" id="entreprise" readonly>    
+
 <label>Personne de contact *</label>
-<input type="text" id="contact">
+<input type="text" id="contact" readonly>
 
 <label>Téléphone *</label>
-<input type="tel" id="telephoneEntreprise">
+<input type="tel" id="telephoneEntreprise" readonly>
 
 <label>Email</label>
-<input type="email" id="emailEntreprise">
+<input type="email" id="emailEntreprise" readonly>
 
 </div>
     
