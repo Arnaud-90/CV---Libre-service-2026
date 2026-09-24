@@ -133,7 +133,7 @@ input[readonly]{
 type="text"
 id="codeClient"
 placeholder="Ex : PAYSAGE01"
-oninput="calculer();chargerEntreprise()">
+oninput="chargerEntreprise()"
     
 <div id="etatCompteClient"></div>
 
@@ -537,6 +537,8 @@ else{
     document.getElementById("emailEntreprise").value = "";
 
 }
+
+calculer();        
         
 console.log(data);
         
