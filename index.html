@@ -471,6 +471,8 @@ Payer (simulation)
 
 <script>
 
+let clientReconnu = false;    
+    
 async function chargerEntreprise(){
 
     let codeClient =
@@ -501,23 +503,37 @@ if(codeClient.length < 9){
 
         const data = await reponse.json();
 
-        console.log("Client trouvé :", data);
+       if(data.entreprise){
 
-        document.getElementById("entreprise").value =
-        data.entreprise || "";
+    clientReconnu = true;
 
-        document.getElementById("contact").value =
-        data.contact || "";
+    document.getElementById("entreprise").value =
+    data.entreprise || "";
 
-        document.getElementById("telephoneEntreprise").value =
-        data.telephone || "";
+    document.getElementById("contact").value =
+    data.contact || "";
 
-        document.getElementById("emailEntreprise").value =
-        data.email || "";
+    document.getElementById("telephoneEntreprise").value =
+    data.telephone || "";
 
-    }
+    document.getElementById("emailEntreprise").value =
+    data.email || "";
+
+}
+else{
+
+    clientReconnu = false;
+
+    document.getElementById("entreprise").value = "";
+    document.getElementById("contact").value = "";
+    document.getElementById("telephoneEntreprise").value = "";
+    document.getElementById("emailEntreprise").value = "";
+
+}
+``
     catch(error){
 
+        clientReconnu = false;
         console.error(
             "Erreur recherche client :",
             error
@@ -525,26 +541,7 @@ if(codeClient.length < 9){
 
     }
 }
-    
-function estCompteClientValide(){
 
-    let codeClient =
-    document.getElementById("codeClient")
-    .value
-    .trim()
-    .toUpperCase();
-
-    return comptesClients.includes(codeClient);
-}    
-
-const comptesClients = [
-    "PAYSAGE01",
-    "PAYSAGE02",
-    "COMMUNE01",
-    "AGRI01",
-    "MANU_TEST"
-];
-    
 const commande =
 "TB-" + new Date().getFullYear() + "-" +
 Math.floor(Math.random()*9000+1000);
@@ -679,7 +676,7 @@ document.getElementById("typeClient").value;
 
 if(typeClient==="entreprise"){
 
-    if(estCompteClientValide()){
+    if(clientReconnu){
 
         document.getElementById("etatCompteClient").innerHTML =
         "<span style='color:green'>✅ Compte client reconnu</span>";
@@ -943,11 +940,14 @@ function payer(){
         .trim()
         .toUpperCase();
 
-        if(!comptesClients.includes(codeClient)){
+        if(!clientReconnu){
 
-            alert("Code compte client non reconnu.");
-            return;
-        }
+    alert(
+    "Code compte client non reconnu."
+    );
+
+    return;
+}
 
         if(
             document.getElementById("entreprise").value.trim()==="" ||
