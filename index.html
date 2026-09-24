@@ -689,7 +689,9 @@ document.getElementById("typeClient").value;
 
 if(typeClient==="entreprise"){
 
-    if(clientReconnu){
+    if(
+    document.getElementById("entreprise").value.trim() !== ""
+    ){
 
         document.getElementById("etatCompteClient").innerHTML =
         "<span style='color:green'>✅ Compte client reconnu</span>";
@@ -953,7 +955,9 @@ function payer(){
         .trim()
         .toUpperCase();
 
-        if(!clientReconnu){
+        if(
+document.getElementById("entreprise").value.trim() === ""
+){
 
     alert(
     "Code compte client non reconnu."
@@ -961,7 +965,6 @@ function payer(){
 
     return;
 }
-
         if(
             document.getElementById("entreprise").value.trim()==="" ||
             document.getElementById("codeClient").value.trim()==="" ||
